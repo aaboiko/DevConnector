@@ -8,6 +8,7 @@ const { check, validationResult } = require('express-validator/check');
 
 const User = require('../../models/User');
 
+//Registration of new user
 router.post('/', [
         check('name', 'Name is required')
         .not()

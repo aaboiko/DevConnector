@@ -42,7 +42,7 @@ const Education = ({ education, deleteEducation }) => {
     )
 };
 
-Education.propsTypes = {
+Education.propTypes = {
     education: PropTypes.array.isRequired,
     deleteEducation: PropTypes.func.isRequired
 };

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profile';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
 import { Link, withRouter } from 'react-router-dom';
 
 const CreateProfile = ({ createProfile, history }) => {
@@ -164,8 +164,14 @@ const CreateProfile = ({ createProfile, history }) => {
     )
 };
 
-CreateProfile.propsTypes = {
-   createProfile: PropTypes.func.isRequired
+CreateProfile.propTypes = {
+	createProfile: PropTypes.func.isRequired,
+	getCurrentProfile: PropTypes.func.isRequired,
+	profile: PropTypes.object.isRequired
 };
-
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+const mapStateToProps = state => ({
+	profile: state.profile
+});
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+	withRouter(CreateProfile)
+);

@@ -39,7 +39,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             youtube: loading || !profile.social ? '' : profile.social.youtube,
             instagram: loading || !profile.social ? '' : profile.social.instagram
         });
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const {
         company,
@@ -183,14 +183,17 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
     )
 };
 
-EditProfile.propsTypes = {
-   createProfile: PropTypes.func.isRequired,
-   getCurrentProfile: PropTypes.func.isRequired,
-   profile: PropTypes.object.isRequired
+EditProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));
+export default connect(
+  mapStateToProps,
+  { createProfile, getCurrentProfile }
+)(withRouter(EditProfile));

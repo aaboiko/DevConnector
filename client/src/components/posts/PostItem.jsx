@@ -13,7 +13,7 @@ const PostItem = ({
     post: { _id, text, name, avatar, user, likes, comments, date },
     showActions
   }) => {
-    console.log(name);//name and avatar are somehow undefined - needs to be fixed!
+   
     return (
         <div className='post bg-white p-1 my-1'>
             <div>

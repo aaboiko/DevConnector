@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://aaboiko:Boiko123321@cluster0.p4eoz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "2e8654947b30ab3c808b",
+    "githubSecret": "a202344fe853857f2d5075dd10b26f9b2a0b611d"
+}

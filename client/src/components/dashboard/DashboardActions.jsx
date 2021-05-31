@@ -15,8 +15,4 @@ const DashboardActions = () => {
     );
 };
 
-DashboardActions.propTypes = {
-    alerts: PropTypes.array.isRequired
-};
-
 export default DashboardActions;

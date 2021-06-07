@@ -86,6 +86,48 @@ router.delete('/:id', auth, async(req, res) => {
     }
 });
 
+//Updating a post
+router.put('/:id', auth, async(req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        const user = await User.findById(req.user.id).select('-password');
+        if (!post) {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+
+        if (post.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized' });
+        }
+
+        const updatedPost = {
+            text: req.body.text,
+            name: user.name,
+            avatar: user.avatar,
+            user: req.user.id,
+            likes: post.likes,
+            comments: post.comments,
+            date: post.date
+        };
+        //Maybe it is not a good-looking construction, but it works
+        post.text = updatedPost.text;
+        post.name = updatedPost.name;
+        post.avatar = updatedPost.avatar;
+        post.user = updatedPost.user;
+        post.likes = updatedPost.likes;
+        post.comments = updatedPost.comments;
+        post.date = updatedPost.date;
+
+        await post.save();
+        res.json(post);
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === 'ObjectId') {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+        res.status(500).send('Server error');
+    }
+});
+
 //Like a post
 router.put('/like/:id', auth, async(req, res) => {
     try {

@@ -8,7 +8,9 @@ import {
     DELETE_POST,
     ADD_COMMENT,
     REMOVE_COMMENT,
-    UPDATE_LIKES
+    UPDATE_LIKES,
+    EDIT_POST,
+    POST_EDITED
 } from './types';
 
 export const getPosts = () => async dispatch => {
@@ -77,6 +79,30 @@ export const deletePost = id => async dispatch => {
     }
 };
 
+export const addPostEdited = (formData, id) => async dispatch => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try {
+        const res = await axios.put(`/api/posts/${id}`, formData, config);
+
+        dispatch({
+            type: POST_EDITED,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Post Edited', 'success'));
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    };
+};
+
 export const addPost = formData => async dispatch => {
     const config = {
         headers: {
@@ -107,6 +133,22 @@ export const getPost = id => async dispatch => {
 
         dispatch({
             type: GET_POST,
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+export const editPost = id => async dispatch => {
+    try {
+        const res = await axios.get(`/api/posts/${id}`);
+        console.log('editing');
+        dispatch({
+            type: EDIT_POST,
             payload: res.data
         });
     } catch (err) {

@@ -7,14 +7,17 @@ import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
 import CommentItem from '../post/CommentItem';
 import { getPost, editPost } from '../../actions/post';
+import NotFound from '../layout/NotFound';
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
     useEffect(() => {
         getPost(match.params.id);
     }, [getPost]);
     
+    console.log(match);
+
     return loading || post === null ? (
-        <Spinner />
+        <NotFound />
     ) : (
         <Fragment>
             <Link to='/posts' className='btn'>

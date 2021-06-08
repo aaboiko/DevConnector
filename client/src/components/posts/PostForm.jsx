@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import { addPost, postEmpty } from '../../actions/post';
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, postEmpty }) => {
     const [text, setText] = useState('');
-    const { register, handleSubmit } = useForm('');
 
     return (
         <div className='post-form'>
@@ -17,7 +15,12 @@ const PostForm = ({ addPost }) => {
                 className='form my-1'
                 onSubmit={e => {
                     e.preventDefault();
-                    addPost({ text })
+                    if(text.trim().length > 0){
+                        addPost({ text })
+                    }
+                    else{
+                        postEmpty();
+                    }
                     setText('');
                 }}
             >
@@ -28,7 +31,6 @@ const PostForm = ({ addPost }) => {
                     placeholder='Create a post'
                     value={text}
                     onChange={e => setText(e.target.value)}
-                    
                 />
                 <input type='submit' className='btn btn-dark my-1' value='Publish' />
             </form>
@@ -40,4 +42,4 @@ PostForm.propTypes = {
     addPost: PropTypes.func.isRequired
 };
 
-export default connect(null, { addPost })(PostForm);
+export default connect(null, { addPost, postEmpty })(PostForm);

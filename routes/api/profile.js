@@ -140,7 +140,7 @@ router.put('/experience', [auth, [
     async(req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ msg: 'Please fill required fields' });
         }
 
         const {
@@ -192,13 +192,13 @@ router.delete('/experience/:exp_id', auth, async(req, res) => {
 router.put('/education', [auth, [
         check('school', 'School is required').not().isEmpty(),
         check('degree', 'Degree is required').not().isEmpty(),
-        check('fieldofstudy', 'Fieldofstudy date is required').not().isEmpty(),
-        check('from', 'From is required').not().isEmpty(),
+        check('fieldofstudy', 'Fieldofstudy is required').not().isEmpty(),
+        check('from', 'From date is required').not().isEmpty(),
     ]],
     async(req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ msg: 'Please fill required fields' });
         }
 
         const {

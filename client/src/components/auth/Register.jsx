@@ -22,6 +22,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
        if(password !== password2){
            setAlert('passwords do not match', 'danger');
        }
+       else if(name.trim() === ''){
+           setAlert('Please enter your name', 'danger');
+       }
+       else if(!email.includes('@')){
+        setAlert('Email address should include @ symbol. Your email does not unclude it', 'danger');
+       }
+       else if(password.length < 6 || password2.length < 6){
+        setAlert('Password should have 6 or more characters', 'danger');
+       }
        else{
           register({ name, email, password });
        }
@@ -42,12 +51,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     placeholder="Name" 
                     name="name" 
                     value={name}
-                    onChange={e => onChange(e)}
-                    required />
+                    onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
                     <input 
-                    type="email" 
+                    type="text" 
                     placeholder="Email Address" 
                     value={email}
                     onChange={e => onChange(e)}
@@ -62,7 +70,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="6"
                         value={password}
                         onChange={e => onChange(e)}
                     />
@@ -72,7 +79,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         type="password"
                         placeholder="Confirm Password"
                         name="password2"
-                        minLength="6"
                         value={password2}
                         onChange={e => onChange(e)}
                     />

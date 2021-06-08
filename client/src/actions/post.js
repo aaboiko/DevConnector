@@ -127,6 +127,9 @@ export const addPost = formData => async dispatch => {
     }
 };
 
+export const postEmpty = () => async dispatch => {
+    dispatch(setAlert('Post cannot be empty', 'danger'));
+}
 export const getPost = id => async dispatch => {
     try {
         const res = await axios.get(`/api/posts/${id}`);
@@ -159,6 +162,9 @@ export const editPost = id => async dispatch => {
     }
 };
 
+export const commentEmpty = () => async dispatch => {
+    dispatch(setAlert('Comment cannot be empty', 'danger'));
+}
 export const addComment = (postId, formData) => async dispatch => {
     const config = {
         headers: {

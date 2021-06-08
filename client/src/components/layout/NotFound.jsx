@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 const NotFound = () => {
   return (
@@ -11,4 +12,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default withRouter(NotFound);

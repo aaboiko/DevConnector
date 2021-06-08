@@ -43,11 +43,11 @@ const AddEducation = ({ addEducation, history }) => {
                 addEducation(formData, history);
             }}>
                 <div className="form-group">
-                    <input type="text" placeholder="* School" name="school" required
+                    <input type="text" placeholder="* School" name="school" 
                         value={school} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="* Degree" name="degree" required
+                    <input type="text" placeholder="* Degree" name="degree" 
                         value={degree} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">

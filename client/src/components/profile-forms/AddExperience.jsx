@@ -44,11 +44,11 @@ const AddExperience = ({ addExperience, history }) => {
                 addExperience(formData, history);
             }}>
                 <div className="form-group">
-                    <input type="text" placeholder="* Job Title" name="title" required
+                    <input type="text" placeholder="* Job Title" name="title" 
                         value={title} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="* Company" name="company" required
+                    <input type="text" placeholder="* Company" name="company" 
                         value={company} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">

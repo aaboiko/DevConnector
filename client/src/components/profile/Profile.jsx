@@ -11,12 +11,12 @@ import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
 import NotFound from '../layout/NotFound';
 
-const Profile = ({ getProfileById, profile: { profile, loading }, auth, match }) => {
+const Profile = ({ getProfileById, profile: { profile, loading, exist }, auth, match }) => {
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
     
-    if(profile === null ){
+    if(!exist){
         return <NotFound />
     }
 

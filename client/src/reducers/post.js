@@ -15,6 +15,7 @@ const initialState = {
     posts: [],
     post: null,
     loading: true,
+    exist: true,
     error: {}
 };
 
@@ -27,6 +28,7 @@ export default function(state = initialState, action) {
                 ...state,
                 posts: payload,
                 loading: false,
+                exist: true
             };
         case GET_POST:
         case POST_EDITED:
@@ -34,30 +36,35 @@ export default function(state = initialState, action) {
                 ...state,
                 post: payload,
                 loading: false,
+                exist: true
             };
         case EDIT_POST:
             return {
                 ...state,
                 post: payload,
                 loading: false,
+                exist: true
             };
         case ADD_POST:
             return {
                 ...state,
                 posts: [payload, ...state.posts],
                 loading: false,
+                exist: true
             };
         case DELETE_POST:
             return {
                 ...state,
                 posts: state.posts.filter(post => post._id !== payload),
-                loading: false
+                loading: false,
+                exist: true
             };
         case POST_ERROR:
             return {
                 ...state,
                 error: payload,
-                loading: false
+                loading: false,
+                exist: false
             };
         case UPDATE_LIKES:
             return {
@@ -71,7 +78,8 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 post: {...state.post, comments: payload },
-                loading: false
+                loading: false,
+                exist: true
             };
         case REMOVE_COMMENT:
             return {
@@ -82,7 +90,8 @@ export default function(state = initialState, action) {
                         comment => comment._id !== payload
                     )
                 },
-                loading: false
+                loading: false,
+                exist: true
             };
         default:
             return state;

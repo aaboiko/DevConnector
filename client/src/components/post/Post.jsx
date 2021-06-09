@@ -9,15 +9,17 @@ import CommentItem from '../post/CommentItem';
 import { getPost, editPost } from '../../actions/post';
 import NotFound from '../layout/NotFound';
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ getPost, post: { post, loading, exist }, match }) => {
     useEffect(() => {
         getPost(match.params.id);
     }, [getPost]);
     
-    console.log(match);
+    if(!exist){
+        return <NotFound />
+    }
 
     return loading || post === null ? (
-        <NotFound />
+        <Spinner />
     ) : (
         <Fragment>
             <Link to='/posts' className='btn'>

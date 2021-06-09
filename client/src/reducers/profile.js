@@ -12,6 +12,7 @@ const initialState = {
     profiles: [],
     repos: [],
     loading: true,
+    exist: true,
     error: {}
 };
 
@@ -24,21 +25,24 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 profile: payload,
-                loading: false
+                loading: false,
+                exist: true
             };
         case PROFILE_ERROR:
             return {
                 ...state,
                 error: payload,
                 loading: false,
-                profile: null
+                profile: null,
+                exist: false
             };
         case CLEAR__PROFILE:
             return {
                 ...state,
                 profile: null,
                 repos: [],
-                loading: false
+                loading: false,
+                exist: true
             };
         case GET_PROFILES:
             return {
@@ -50,7 +54,8 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 repos: payload,
-                loading: false
+                loading: false,
+                exist: true
             };
         default:
             return state;
